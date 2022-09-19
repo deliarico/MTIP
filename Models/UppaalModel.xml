@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Clock
+clock clockTime;
+
+// Constants (Wolper)
+const int LOST = 0; 
+const int WHITE = 1; 
+const int RED = 2; 
+const int BLUE = 3; 
+
+// Constants (and limits)
+const int TIMELIMIT  = 4;
+const int MAXBUF = 4; 
+const int MAXSBL = 3;  
+const int DEADLINE = 3; 
+const int EMPTY = 0; 
+
+// Configurations 
+int c_sblNum=3;
+int c_lossTendency=50;
+int c_lateTendency=50;
+
+int d_r=0, d_b=0, o_r=0, o_b=0, l_r=0, l_b=0;
+int a_r=0, a_b=0, a_a=0;
+
+// Channels
+broadcast chan Sync;
+broadcast chan ToSublink[MAXSBL];
+broadcast chan FromSublink[MAXSBL];
+broadcast chan Reset;
+broadcast chan ForceEmpty;
+
+// Sending - Receiving Variables
+int sndData=0;    // From Source to Sublink
+int sndTime=0;    // From Source to Sublink
+int sblData;     // From Sublink to Destination
+int sblTime;      // From Sublink to Destination
+
+// Control variables that could be replaced 
+int empty[MAXSBL]={0,0,0};
+int full[MAXSBL]={0,0,0};
+
+// Channel control
+int sblLoc[MAXSBL]={0,0,0};
+int dstLoc=0;
+
+// End states
+int sourceEnd=0;
+int receiverEnd=0;
+
+
+</declaration>
+	<template>
+		<name x="5" y="5">Sender</name>
+		<declaration>// Iterators and similar
+int sblIterator=0;
+int wolper=0;
+
+// Methods
+int sublinksAreFull(){
+    return full[0]!=0 || full[1]!=0 || full[2]!=0;// || full[3]!=0 ;
+}
+</declaration>
+		<location id="id0" x="-595" y="-178">
+			<name x="-612" y="-212">Initial</name>
+			<label kind="exponentialrate" x="-595" y="-229">1:2</label>
+		</location>
+		<location id="id1" x="-110" y="-178">
+			<name x="-221" y="-204">ReadyToSend</name>
+			<label kind="invariant" x="-93" y="-221">clockTime&lt;=TIMELIMIT  &amp;&amp; 
+clockTime&lt;=sndTime+1</label>
+			<label kind="exponentialrate" x="-153" y="-221">1:2</label>
+		</location>
+		<location id="id2" x="289" y="-178">
+			<name x="255" y="-212">SourceEnd</name>
+			<label kind="exponentialrate" x="306" y="-229">1:2</label>
+		</location>
+		<location id="id3" x="-323" y="-8">
+			<name x="-306" y="-34">Sending</name>
+			<committed/>
+		</location>
+		<location id="id4" x="-323" y="144">
+			<name x="-442" y="153">WolperSelected</name>
+			<committed/>
+		</location>
+		<location id="id5" x="-476" y="85">
+			<name x="-595" y="76">SelectingWhite</name>
+			<committed/>
+		</location>
+		<location id="id6" x="-110" y="-323">
+			<name x="-170" y="-357">WaitingForReset</name>
+		</location>
+		<location id="id7" x="17" y="170">
+			<name x="-17" y="136">toSublinks</name>
+			<committed/>
+		</location>
+		<location id="id8" x="-323" y="85">
+			<name x="-306" y="76">SelectingRed</name>
+			<committed/>
+		</location>
+		<location id="id9" x="-187" y="85">
+			<name x="-170" y="76">SelectingBlue</name>
+			<committed/>
+		</location>
+		<init ref="id0"/>
+		<transition>
+			<source ref="id9"/>
+			<target ref="id4"/>
+			<nail x="-187" y="119"/>
+			<nail x="-187" y="144"/>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id4"/>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id7"/>
+			<nail x="-323" y="170"/>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id7"/>
+			<label kind="guard" x="42" y="178">sblIterator&lt;c_sblNum &amp;&amp; 
+sblLoc[sblIterator]==1</label>
+			<label kind="synchronisation" x="42" y="212">ToSublink[sblIterator]!</label>
+			<label kind="assignment" x="42" y="229">sblIterator++</label>
+			<nail x="-8" y="229"/>
+			<nail x="42" y="229"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id9"/>
+			<label kind="guard" x="-178" y="0">wolper==3</label>
+			<label kind="assignment" x="-178" y="17">sndData=BLUE,
+wolper++</label>
+			<nail x="-186" y="-8"/>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id1"/>
+			<label kind="synchronisation" x="-34" y="-306">Reset?</label>
+			<label kind="assignment" x="-34" y="-289">sndTime=0</label>
+			<nail x="-42" y="-323"/>
+			<nail x="-42" y="-255"/>
+			<nail x="-110" y="-255"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-382" y="-306">clockTime==TIMELIMIT 
+&amp;&amp; sndTime+1&gt;TIMELIMIT</label>
+			<nail x="-110" y="-255"/>
+			<nail x="-187" y="-255"/>
+			<nail x="-187" y="-323"/>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id4"/>
+			<label kind="guard" x="-552" y="110">wolper&lt;4</label>
+			<label kind="assignment" x="-552" y="126">wolper++</label>
+			<nail x="-476" y="144"/>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id4"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id8"/>
+			<label kind="guard" x="-314" y="0">wolper==1</label>
+			<label kind="assignment" x="-314" y="17">sndData=RED, 
+wolper++</label>
+			<nail x="-323" y="34"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id5"/>
+			<label kind="guard" x="-467" y="0">wolper==0 ||
+wolper==2 ||
+wolper==4</label>
+			<label kind="assignment" x="-467" y="51">sndData=WHITE</label>
+			<nail x="-476" y="-8"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-297" y="-119">!sublinksAreFull() &amp;&amp; 
+clockTime &gt;=sndTime &amp;&amp;
+sndTime+1&lt;=TIMELIMIT</label>
+			<nail x="-110" y="-59"/>
+			<nail x="-323" y="-59"/>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id2"/>
+			<label kind="guard" x="221" y="-144">receiverEnd</label>
+			<nail x="272" y="-144"/>
+			<nail x="306" y="-144"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="guard" x="144" y="-212">wolper==4</label>
+			<label kind="assignment" x="144" y="-195">sourceEnd=1</label>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id1"/>
+			<label kind="guard" x="110" y="102">sblIterator==c_sblNum</label>
+			<label kind="assignment" x="110" y="119">sblIterator=0, sndTime++</label>
+			<nail x="68" y="170"/>
+			<nail x="102" y="170"/>
+			<nail x="102" y="93"/>
+			<nail x="102" y="-59"/>
+			<nail x="-110" y="-59"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="synchronisation" x="-535" y="-212">Sync!</label>
+			<label kind="assignment" x="-544" y="-195">clockTime=0, sndTime=0</label>
+		</transition>
+	</template>
+	<template>
+		<name>Sublink</name>
+		<parameter>int id</parameter>
+		<declaration>// Structures
+typedef  struct {
+  int timestamp;
+  int color;
+} Packet;
+
+typedef struct{
+  Packet pos[MAXBUF];
+  int[0,MAXBUF-1] front;
+  int[0,MAXBUF-1] final;
+  int[0,MAXBUF] length;
+} Queue;
+
+
+// Sublink Buffer
+Queue sublinkBuffer; 
+
+// Sublink Buffer control
+int length(Queue q){
+    return q.length;
+}
+int front(Queue q){
+    return q.front;
+}
+int final(Queue q){
+    return q.final;
+}
+
+// Sublink Buffer methods
+void insertBuffer(int time, int c){
+   	sublinkBuffer.final := (sublinkBuffer.final + 1)%MAXBUF;
+   	sublinkBuffer.pos[sublinkBuffer.final].timestamp:=time;
+   	sublinkBuffer.length++;
+    sublinkBuffer.pos[sublinkBuffer.final].color=c;
+}
+
+void emptyBuffer(){
+    while(sublinkBuffer.length&gt;0){
+        sublinkBuffer.front := (sublinkBuffer.front+1)%MAXBUF; //
+        sublinkBuffer.length--;
+    }
+}
+
+void extractFrontBuffer(){
+    sublinkBuffer.front := (sublinkBuffer.front+1)%MAXBUF;
+    sublinkBuffer.length--;
+}
+
+bool isFullBuffer(){
+     return sublinkBuffer.length==MAXBUF;
+}
+
+bool isEmptyBuffer(){
+    return sublinkBuffer.length==0;
+}
+
+int timestampFrontBuffer(){
+    return sublinkBuffer.pos[sublinkBuffer.front].timestamp;
+}
+
+int dataFrontBuffer(){
+    return sublinkBuffer.pos[sublinkBuffer.front].color;
+}
+
+void initializeBuffer(){       
+    sublinkBuffer.final := MAXBUF-1; //LIMIT=DEADLINE*2; //MAXBUF=LIMIT;
+}
+</declaration>
+		<location id="id10" x="-8" y="-289">
+			<name x="-25" y="-323">Initial</name>
+		</location>
+		<location id="id11" x="-8" y="-161">
+			<name x="-68" y="-178">Empty</name>
+			<label kind="exponentialrate" x="-51" y="-161">1:2</label>
+		</location>
+		<location id="id12" x="-8" y="0">
+			<name x="-85" y="-42">NotEmpty</name>
+			<label kind="exponentialrate" x="-195" y="-59">(100-c_lateTendency):100</label>
+		</location>
+		<location id="id13" x="-8" y="187">
+			<name x="-93" y="195">PacketSent</name>
+			<committed/>
+		</location>
+		<location id="id14" x="476" y="0">
+			<name x="314" y="-25">ResetingToEmptyState</name>
+			<committed/>
+		</location>
+		<branchpoint id="id15" x="-8" y="85">
+		</branchpoint>
+		<init ref="id10"/>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id14"/>
+			<label kind="synchronisation" x="144" y="25">ForceEmpty?</label>
+			<label kind="assignment" x="144" y="42">emptyBuffer()</label>
+			<nail x="136" y="0"/>
+			<nail x="136" y="25"/>
+			<nail x="280" y="25"/>
+			<nail x="280" y="0"/>
+		</transition>
+		<transition>
+			<source ref="id15"/>
+			<target ref="id13"/>
+			<label kind="synchronisation" x="59" y="110">FromSublink[id]!</label>
+			<label kind="assignment" x="59" y="127">sblData=LOST,
+sblTime=timestampFrontBuffer(),
+extractFrontBuffer()</label>
+			<label kind="probability" x="59" y="93">c_lossTendency</label>
+			<nail x="51" y="85"/>
+			<nail x="51" y="187"/>
+		</transition>
+		<transition>
+			<source ref="id15"/>
+			<target ref="id13"/>
+			<label kind="synchronisation" x="-246" y="110">FromSublink[id]!</label>
+			<label kind="assignment" x="-246" y="127">sblData=dataFrontBuffer(),
+sblTime=timestampFrontBuffer(),
+extractFrontBuffer()</label>
+			<label kind="probability" x="-246" y="93">(100-c_lossTendency)</label>
+			<nail x="-68" y="85"/>
+			<nail x="-68" y="187"/>
+		</transition>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id15"/>
+			<label kind="guard" x="0" y="34">dstLoc==1</label>
+			<label kind="assignment" x="0" y="51">sblLoc[id]=0</label>
+			<nail x="-8" y="34"/>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id11"/>
+			<label kind="assignment" x="289" y="-221">full[id]=isFullBuffer(), 
+empty[id]=isEmptyBuffer(), 
+sblLoc[id]=1</label>
+			<nail x="476" y="-161"/>
+		</transition>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id14"/>
+			<label kind="guard" x="144" y="-51">isEmptyBuffer()</label>
+			<nail x="136" y="0"/>
+			<nail x="136" y="-25"/>
+			<nail x="280" y="-25"/>
+			<nail x="280" y="0"/>
+		</transition>
+		<transition>
+			<source ref="id13"/>
+			<target ref="id12"/>
+			<label kind="guard" x="-119" y="255">!isEmptyBuffer()</label>
+			<label kind="assignment" x="-102" y="272">sblLoc[id]=1</label>
+			<nail x="-8" y="255"/>
+			<nail x="-51" y="255"/>
+			<nail x="-314" y="255"/>
+			<nail x="-314" y="17"/>
+			<nail x="-42" y="17"/>
+		</transition>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id12"/>
+			<label kind="guard" x="-433" y="-85">!isFullBuffer()</label>
+			<label kind="synchronisation" x="-433" y="-68">ToSublink[id]?</label>
+			<label kind="assignment" x="-433" y="-51">insertBuffer(sndTime,sndData),
+full[id]=isFullBuffer()</label>
+			<nail x="-42" y="-17"/>
+			<nail x="-221" y="-17"/>
+			<nail x="-221" y="-85"/>
+			<nail x="-441" y="-85"/>
+			<nail x="-442" y="0"/>
+		</transition>
+		<transition>
+			<source ref="id13"/>
+			<target ref="id14"/>
+			<label kind="guard" x="0" y="255">isEmptyBuffer()</label>
+			<nail x="-8" y="255"/>
+			<nail x="476" y="255"/>
+		</transition>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id12"/>
+			<label kind="synchronisation" x="0" y="-127">ToSublink[id]?</label>
+			<label kind="assignment" x="0" y="-110">empty[id]=0, 
+insertBuffer(sndTime,sndData)</label>
+		</transition>
+		<transition>
+			<source ref="id10"/>
+			<target ref="id11"/>
+			<label kind="synchronisation" x="0" y="-281">Sync?</label>
+			<label kind="assignment" x="0" y="-264">empty[id]=isEmptyBuffer(), 
+full[id]=isFullBuffer(), 
+sblLoc[id]=1,
+initializeBuffer()</label>
+		</transition>
+	</template>
+	<template>
+		<name>Receiver</name>
+		<declaration>// Reception variables
+int rcvTime;
+int rcvData;
+int rcpBuffer[TIMELIMIT];
+
+// Checking Variables
+int bufferIterator, consumed;
+
+
+// Methods
+void resetCheckerVariables(){
+    d_r=0; 
+    d_b=0; 
+    o_r=0;
+    o_b=0;
+    l_r=0;
+    l_b=0; 
+}
+
+int sublinksAreEmpty(){
+    return empty[0]==1 &amp;&amp; empty[1]==1 &amp;&amp; empty[2]==1;// &amp;&amp; empty[2]==1;
+}
+
+// Reception buffer control
+void saveBuffer(int time,int color){
+    rcpBuffer[time]=color; 
+}
+
+void cleanBuffer(){
+    int i;
+    for(i=0;i&lt;TIMELIMIT;i++){
+        rcpBuffer[i]=0;
+    }
+
+}
+
+int rcpBufferConsumed(){
+    return rcpBuffer[0]==0 &amp;&amp; rcpBuffer[1]==0 &amp;&amp; rcpBuffer[2]==0 &amp;&amp; rcpBuffer[3]==0;
+}
+ 
+</declaration>
+		<location id="id16" x="-765" y="-68">
+			<name x="-782" y="-102">Initial</name>
+		</location>
+		<location id="id17" x="-313" y="-68">
+			<name x="-433" y="-93">ReadyToReceive</name>
+			<label kind="invariant" x="-569" y="-110">clockTime&lt;=TIMELIMIT+DEADLINE</label>
+		</location>
+		<location id="id18" x="-314" y="-382">
+			<name x="-340" y="-416">TotalEnd</name>
+			<label kind="exponentialrate" x="-305" y="-365">1:2</label>
+		</location>
+		<location id="id19" x="178" y="-170">
+			<name x="59" y="-179">CleaningBuffer</name>
+			<committed/>
+		</location>
+		<location id="id20" x="-314" y="127">
+			<name x="-433" y="102">ReceivingInMTIP</name>
+			<committed/>
+		</location>
+		<location id="id21" x="178" y="-68">
+			<name x="93" y="-51">ResetingClock</name>
+			<committed/>
+		</location>
+		<location id="id22" x="-314" y="442">
+			<name x="-306" y="450">Processed</name>
+			<committed/>
+		</location>
+		<location id="id23" x="178" y="-340">
+			<name x="102" y="-348">Iterating</name>
+			<committed/>
+		</location>
+		<location id="id24" x="-25" y="289">
+			<name x="-8" y="280">LateOrLossPacket</name>
+			<committed/>
+		</location>
+		<location id="id25" x="-314" y="289">
+			<name x="-297" y="280">OnTimePacket</name>
+			<committed/>
+		</location>
+		<location id="id26" x="51" y="-433">
+			<name x="68" y="-442">r_r</name>
+			<committed/>
+		</location>
+		<location id="id27" x="306" y="-433">
+			<name x="263" y="-442">r_b</name>
+			<committed/>
+		</location>
+		<location id="id28" x="-595" y="289">
+			<name x="-578" y="280">DuplicatedPacket</name>
+			<committed/>
+		</location>
+		<init ref="id16"/>
+		<transition>
+			<source ref="id28"/>
+			<target ref="id22"/>
+			<label kind="guard" x="-578" y="331">rcvData==BLUE</label>
+			<label kind="assignment" x="-518" y="348">d_b++</label>
+			<nail x="-595" y="348"/>
+			<nail x="-518" y="348"/>
+			<nail x="-518" y="416"/>
+			<nail x="-595" y="416"/>
+			<nail x="-595" y="442"/>
+		</transition>
+		<transition>
+			<source ref="id28"/>
+			<target ref="id22"/>
+			<label kind="guard" x="-722" y="331">rcvData==RED</label>
+			<label kind="assignment" x="-722" y="348">d_r++</label>
+			<nail x="-595" y="348"/>
+			<nail x="-671" y="348"/>
+			<nail x="-671" y="416"/>
+			<nail x="-595" y="416"/>
+			<nail x="-595" y="442"/>
+		</transition>
+		<transition>
+			<source ref="id28"/>
+			<target ref="id22"/>
+			<label kind="guard" x="-663" y="374">rcvData==WHITE</label>
+			<nail x="-595" y="442"/>
+		</transition>
+		<transition>
+			<source ref="id27"/>
+			<target ref="id23"/>
+			<label kind="assignment" x="314" y="-501">a_a++,
+a_b++,
+consumed=0</label>
+			<nail x="306" y="-399"/>
+			<nail x="195" y="-399"/>
+		</transition>
+		<transition>
+			<source ref="id26"/>
+			<target ref="id23"/>
+			<label kind="assignment" x="-76" y="-501">a_a++,
+a_r++, 
+consumed=0</label>
+			<nail x="51" y="-399"/>
+			<nail x="161" y="-399"/>
+		</transition>
+		<transition>
+			<source ref="id25"/>
+			<target ref="id22"/>
+			<label kind="guard" x="-374" y="374">rcvData==WHITE</label>
+			<nail x="-314" y="348"/>
+			<nail x="-314" y="408"/>
+		</transition>
+		<transition>
+			<source ref="id25"/>
+			<target ref="id22"/>
+			<label kind="guard" x="-297" y="331">rcvData==BLUE</label>
+			<label kind="assignment" x="-238" y="348">o_b++</label>
+			<nail x="-314" y="348"/>
+			<nail x="-238" y="348"/>
+			<nail x="-238" y="416"/>
+			<nail x="-314" y="416"/>
+		</transition>
+		<transition>
+			<source ref="id25"/>
+			<target ref="id22"/>
+			<label kind="guard" x="-442" y="331">rcvData==RED</label>
+			<label kind="assignment" x="-442" y="348">o_r++</label>
+			<nail x="-314" y="348"/>
+			<nail x="-391" y="348"/>
+			<nail x="-391" y="416"/>
+			<nail x="-314" y="416"/>
+		</transition>
+		<transition>
+			<source ref="id24"/>
+			<target ref="id22"/>
+			<label kind="guard" x="0" y="331">rcvData==BLUE</label>
+			<label kind="assignment" x="59" y="348">l_b++</label>
+			<nail x="-25" y="348"/>
+			<nail x="50" y="348"/>
+			<nail x="50" y="416"/>
+			<nail x="-25" y="416"/>
+			<nail x="-25" y="442"/>
+			<nail x="-212" y="442"/>
+		</transition>
+		<transition>
+			<source ref="id24"/>
+			<target ref="id22"/>
+			<label kind="guard" x="-85" y="374">rcvData==WHITE ||
+rcvData==LOST</label>
+			<nail x="-25" y="442"/>
+		</transition>
+		<transition>
+			<source ref="id24"/>
+			<target ref="id22"/>
+			<label kind="guard" x="-144" y="331">rcvData==RED</label>
+			<label kind="assignment" x="-144" y="348">l_r++</label>
+			<nail x="-25" y="348"/>
+			<nail x="-102" y="348"/>
+			<nail x="-102" y="416"/>
+			<nail x="-25" y="416"/>
+			<nail x="-25" y="442"/>
+		</transition>
+		<transition>
+			<source ref="id23"/>
+			<target ref="id23"/>
+			<label kind="guard" x="314" y="-382">bufferIterator&lt;TIMELIMIT-1 &amp;&amp; 
+consumed!=RED &amp;&amp; consumed!=BLUE</label>
+			<label kind="assignment" x="314" y="-340">bufferIterator++,
+consumed=rcpBuffer[bufferIterator], 
+rcpBuffer[bufferIterator]=EMPTY</label>
+			<nail x="204" y="-382"/>
+			<nail x="306" y="-382"/>
+			<nail x="306" y="-289"/>
+			<nail x="203" y="-289"/>
+		</transition>
+		<transition>
+			<source ref="id23"/>
+			<target ref="id27"/>
+			<label kind="guard" x="314" y="-518">consumed==BLUE</label>
+			<nail x="178" y="-510"/>
+			<nail x="306" y="-510"/>
+		</transition>
+		<transition>
+			<source ref="id23"/>
+			<target ref="id26"/>
+			<label kind="guard" x="-76" y="-518">consumed==RED</label>
+			<nail x="178" y="-510"/>
+			<nail x="51" y="-510"/>
+		</transition>
+		<transition>
+			<source ref="id19"/>
+			<target ref="id23"/>
+			<label kind="assignment" x="187" y="-255">bufferIterator=0, 
+consumed=rcpBuffer[bufferIterator], 
+rcpBuffer[bufferIterator]=EMPTY</label>
+		</transition>
+		<transition>
+			<source ref="id22"/>
+			<target ref="id17"/>
+			<label kind="assignment" x="-391" y="493">dstLoc=1</label>
+			<nail x="-314" y="493"/>
+			<nail x="-739" y="493"/>
+			<nail x="-739" y="25"/>
+			<nail x="-365" y="25"/>
+		</transition>
+		<transition>
+			<source ref="id20"/>
+			<target ref="id28"/>
+			<label kind="guard" x="-586" y="178">clockTime-rcvTime&lt;DEADLINE &amp;&amp;
+rcpBuffer[rcvTime]!=EMPTY &amp;&amp;
+rcvData!=LOST</label>
+			<label kind="comments" x="-595" y="101">Duplicated</label>
+			<nail x="-595" y="127"/>
+		</transition>
+		<transition>
+			<source ref="id20"/>
+			<target ref="id25"/>
+			<label kind="guard" x="-306" y="178">clockTime-rcvTime&lt;DEADLINE &amp;&amp; 
+rcpBuffer[rcvTime]==EMPTY &amp;&amp;
+rcvData!=LOST</label>
+			<label kind="assignment" x="-306" y="229">saveBuffer(rcvTime,rcvData)</label>
+			<label kind="comments" x="-306" y="144">Ontime</label>
+			<nail x="-314" y="169"/>
+			<nail x="-314" y="229"/>
+		</transition>
+		<transition>
+			<source ref="id21"/>
+			<target ref="id19"/>
+			<label kind="guard" x="229" y="-93">sublinksAreEmpty()</label>
+			<nail x="254" y="-68"/>
+			<nail x="373" y="-68"/>
+			<nail x="374" y="-170"/>
+		</transition>
+		<transition>
+			<source ref="id17"/>
+			<target ref="id21"/>
+			<label kind="guard" x="-255" y="-136">clockTime==TIMELIMIT+(DEADLINE) &amp;&amp; 
+sourceEnd==0 || (sourceEnd==1 &amp;&amp; 
+(!sublinksAreEmpty() || !rcpBufferConsumed()))</label>
+			<label kind="assignment" x="-255" y="-85">dstLoc=0</label>
+			<nail x="-263" y="-68"/>
+		</transition>
+		<transition>
+			<source ref="id20"/>
+			<target ref="id24"/>
+			<label kind="guard" x="-17" y="178">clockTime-rcvTime&gt;=DEADLINE || 
+rcvData==LOST</label>
+			<label kind="comments" x="-93" y="101">Lost/Late</label>
+			<nail x="-25" y="127"/>
+			<nail x="-25" y="212"/>
+		</transition>
+		<transition>
+			<source ref="id23"/>
+			<target ref="id17"/>
+			<label kind="guard" x="-255" y="-297">consumed!=RED &amp;&amp; consumed!=BLUE 
+&amp;&amp; bufferIterator==TIMELIMIT-1</label>
+			<label kind="synchronisation" x="-255" y="-263">Reset!</label>
+			<label kind="assignment" x="-255" y="-246">clockTime=0, sndTime=0, 
+resetCheckerVariables(), dstLoc=1</label>
+			<nail x="118" y="-204"/>
+			<nail x="-263" y="-204"/>
+		</transition>
+		<transition>
+			<source ref="id18"/>
+			<target ref="id18"/>
+			<nail x="-280" y="-390"/>
+			<nail x="-280" y="-373"/>
+		</transition>
+		<transition>
+			<source ref="id17"/>
+			<target ref="id18"/>
+			<label kind="guard" x="-501" y="-314">rcpBufferConsumed() &amp;&amp; 
+sublinksAreEmpty() &amp;&amp; 
+sourceEnd==1</label>
+			<label kind="assignment" x="-501" y="-263">receiverEnd=true, 
+dstLoc=0</label>
+		</transition>
+		<transition>
+			<source ref="id21"/>
+			<target ref="id19"/>
+			<label kind="guard" x="187" y="-144">!sublinksAreEmpty()</label>
+			<label kind="synchronisation" x="187" y="-127">ForceEmpty!</label>
+		</transition>
+		<transition>
+			<source ref="id17"/>
+			<target ref="id20"/>
+			<label kind="select" x="-297" y="8">id : int [0,MAXSBL-1]</label>
+			<label kind="synchronisation" x="-297" y="25">FromSublink[id]?</label>
+			<label kind="assignment" x="-297" y="42">rcvTime=sblTime, 
+rcvData=sblData,
+dstLoc=0</label>
+			<label kind="comments" x="-297" y="-17">PacketReceived!</label>
+		</transition>
+		<transition>
+			<source ref="id16"/>
+			<target ref="id17"/>
+			<label kind="synchronisation" x="-731" y="-102">Sync?</label>
+			<label kind="assignment" x="-731" y="-85">dstLoc=1</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+s =Sender();
+s0 =Sublink(0);
+s1 =Sublink(1);
+s2 =Sublink(2); 
+r =Receiver();
+
+// List one or more processes to be composed into a system.
+system s,s0,s1,s2,r;
+    </system>
+	<queries>
+		<query>
+			<formula>A[] not deadlock</formula>
+			<comment>General</comment>
+		</query>
+		<query>
+			<formula>A[] ((a_r &lt;= 1) &amp;&amp; (a_b &lt;= 1)) 
+</formula>
+			<comment>p1</comment>
+		</query>
+		<query>
+			<formula>A[] not ((l_r==3 &amp;&amp; a_r&gt;0) &amp;&amp; (l_b==3 &amp;&amp; a_b&gt;0))</formula>
+			<comment>p2</comment>
+		</query>
+		<query>
+			<formula>A[] not (r.r_r &amp;&amp; a_a&gt;0)</formula>
+			<comment>p3</comment>
+		</query>
+		<query>
+			<formula>(o_r==1 &amp;&amp; a_r==0) --&gt; r.r_r</formula>
+			<comment>p4_1</comment>
+		</query>
+		<query>
+			<formula>(o_b==1 &amp;&amp; a_b==0) --&gt; r.r_b</formula>
+			<comment>p4_2</comment>
+		</query>
+		<query>
+			<formula>Pr[&lt;=100] (&lt;&gt;a_r&gt;0)</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>Pr[&lt;=100] (&lt;&gt;d_r&gt;0)</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>Pr[&lt;=100] (&lt;&gt;a_b&gt;0)</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>Pr[&lt;=100] (&lt;&gt;d_b&gt;0)</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>Pr[&lt;=100] (&lt;&gt;receiverEnd==1)</formula>
+			<comment></comment>
+		</query>
+	</queries>
+</nta>
