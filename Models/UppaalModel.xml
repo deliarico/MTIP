@@ -18,12 +18,12 @@ const int DEADLINE = 3;
 const int EMPTY = 0; 
 
 // Configurations 
-int c_sblNum=2;
+int c_sblNum=3;
 int c_lossTendency=50;
 int c_lateTendency=50;
 
 int d_r=0, d_b=0, o_r=0, o_b=0, l_r=0, l_b=0;
-int a_r=0, a_b=0, a_a=0;
+int a_r=0, a_b=0;
 
 // Channels
 broadcast chan Sync;
@@ -547,8 +547,7 @@ int rcpBufferConsumed(){
 		<transition>
 			<source ref="id27"/>
 			<target ref="id23"/>
-			<label kind="assignment" x="314" y="-501">a_a++,
-a_b++,
+			<label kind="assignment" x="314" y="-501">a_b++,
 consumed=0</label>
 			<nail x="306" y="-399"/>
 			<nail x="195" y="-399"/>
@@ -556,8 +555,7 @@ consumed=0</label>
 		<transition>
 			<source ref="id26"/>
 			<target ref="id23"/>
-			<label kind="assignment" x="-76" y="-501">a_a++,
-a_r++, 
+			<label kind="assignment" x="-76" y="-501">a_r++, 
 consumed=0</label>
 			<nail x="51" y="-399"/>
 			<nail x="161" y="-399"/>
