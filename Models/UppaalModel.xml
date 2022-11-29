@@ -18,7 +18,7 @@ const int DEADLINE = 3;
 const int EMPTY = 0; 
 
 // Configurations 
-int c_sblNum=3;
+int c_sblNum=2;
 int c_lossTendency=50;
 int c_lateTendency=50;
 
@@ -93,7 +93,7 @@ clockTime&lt;=sndTime+1</label>
 			<name x="-170" y="-357">WaitingForReset</name>
 		</location>
 		<location id="id7" x="17" y="170">
-			<name x="-17" y="136">toSublinks</name>
+			<name x="-17" y="136">ToSublinks</name>
 			<committed/>
 		</location>
 		<location id="id8" x="-323" y="85">
@@ -758,14 +758,14 @@ dstLoc=0</label>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
-s =Sender();
-s0 =Sublink(0);
-s1 =Sublink(1);
-s2 =Sublink(2); 
-r =Receiver();
+s = Sender();
+sb0 = Sublink(0);
+sb1 = Sublink(1);
+sb2 = Sublink(2); 
+r = Receiver();
 
 // List one or more processes to be composed into a system.
-system s,s0,s1,s2,r;
+system s,sb0,sb1,sb2,r;
     </system>
 	<queries>
 		<query>
@@ -778,39 +778,39 @@ system s,s0,s1,s2,r;
 			<comment>p1</comment>
 		</query>
 		<query>
-			<formula>A[] not ((l_r==3 &amp;&amp; a_r&gt;0) &amp;&amp; (l_b==3 &amp;&amp; a_b&gt;0))</formula>
+			<formula>A[] not ((l_r == c_sblNum &amp;&amp; a_r &gt; 0) &amp;&amp; (l_b == c_sblNum &amp;&amp; a_b &gt; 0))</formula>
 			<comment>p2</comment>
 		</query>
 		<query>
-			<formula>A[] not (r.r_r &amp;&amp; a_a&gt;0)</formula>
+			<formula>A[] not (r.r_r &amp;&amp; (a_b &gt; 0 || a_r &gt; 0) )</formula>
 			<comment>p3</comment>
 		</query>
 		<query>
-			<formula>(o_r==1 &amp;&amp; a_r==0) --&gt; r.r_r</formula>
+			<formula>(o_r == 1 &amp;&amp; a_r == 0) --&gt; r.r_r</formula>
 			<comment>p4_1</comment>
 		</query>
 		<query>
-			<formula>(o_b==1 &amp;&amp; a_b==0) --&gt; r.r_b</formula>
+			<formula>(o_b == 1 &amp;&amp; a_b == 0) --&gt; r.r_b</formula>
 			<comment>p4_2</comment>
 		</query>
 		<query>
-			<formula>Pr[&lt;=100] (&lt;&gt;a_r&gt;0)</formula>
+			<formula>Pr[&lt;=100] (&lt;&gt; a_r &gt; 0)</formula>
 			<comment></comment>
 		</query>
 		<query>
-			<formula>Pr[&lt;=100] (&lt;&gt;d_r&gt;0)</formula>
+			<formula>Pr[&lt;=100] (&lt;&gt; d_r &gt; 0)</formula>
 			<comment></comment>
 		</query>
 		<query>
-			<formula>Pr[&lt;=100] (&lt;&gt;a_b&gt;0)</formula>
+			<formula>Pr[&lt;=100] (&lt;&gt; a_b &gt; 0)</formula>
 			<comment></comment>
 		</query>
 		<query>
-			<formula>Pr[&lt;=100] (&lt;&gt;d_b&gt;0)</formula>
+			<formula>Pr[&lt;=100] (&lt;&gt; d_b &gt; 0)</formula>
 			<comment></comment>
 		</query>
 		<query>
-			<formula>Pr[&lt;=100] (&lt;&gt;receiverEnd==1)</formula>
+			<formula>Pr[&lt;=100] (&lt;&gt; receiverEnd == 1)</formula>
 			<comment></comment>
 		</query>
 	</queries>
