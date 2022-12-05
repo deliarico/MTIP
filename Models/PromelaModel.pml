@@ -195,10 +195,10 @@ active proctype Receiver()
 
 }
 
-// /* Correctness properties */                                  
-// ltl p1  { [] ((a_r <= 1) && (a_b <= 1)) }
-// ltl p2_1{ [] (l_r == SBLNUM -> [](a_r == 0)) }
-// ltl p2_2{ [] (l_b == SBLNUM -> [](a_b == 0)) }
+// /* Correctness properties */
+// ltl p1_1{ [] (l_r == SBLNUM -> [](a_r == 0)) }
+// ltl p1_2{ [] (l_b == SBLNUM -> [](a_b == 0)) }                                  
+// ltl p2  { [] ((a_r <= 1) && (a_b <= 1)) }
 // ltl p3  { [] (r_b -> []!r_r) }
 // ltl p4  { [] (((Receiver@o_r && (a_r == 0)) -> <>r_r)  && ((Receiver@o_b && (a_b == 0))-> <>r_b)) }
  
