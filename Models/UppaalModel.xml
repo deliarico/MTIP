@@ -769,16 +769,16 @@ system s,sb0,sb1,sb2,r;
 		<query>
 			<formula>A[] not deadlock</formula>
 			<comment>General</comment>
+		</query>		
+		<query>
+			<formula>A[] not ((l_r == c_sblNum &amp;&amp; a_r &gt; 0) &amp;&amp; (l_b == c_sblNum &amp;&amp; a_b &gt; 0))</formula>
+			<comment>p1</comment>
 		</query>
 		<query>
 			<formula>A[] ((a_r &lt;= 1) &amp;&amp; (a_b &lt;= 1)) 
 </formula>
-			<comment>p1</comment>
-		</query>
-		<query>
-			<formula>A[] not ((l_r == c_sblNum &amp;&amp; a_r &gt; 0) &amp;&amp; (l_b == c_sblNum &amp;&amp; a_b &gt; 0))</formula>
 			<comment>p2</comment>
-		</query>
+		</query> 
 		<query>
 			<formula>A[] not (r.r_r &amp;&amp; (a_b &gt; 0 || a_r &gt; 0) )</formula>
 			<comment>p3</comment>
