@@ -1,2 +1,2 @@
 # MTIP
-Multi-connectivity Tactile Internet Protocol
+The Multi-connection Tactile Internet Protocol
