@@ -780,7 +780,7 @@ system s,sb0,sb1,sb2,r;
 			<comment>p2</comment>
 		</query> 
 		<query>
-			<formula>A[] not (r.r_r &amp;&amp; (a_b &gt; 0 || a_r &gt; 0) )</formula>
+			<formula>A[] not (r.r_r &amp;&amp; a_b &gt; 0)</formula>
 			<comment>p3</comment>
 		</query>
 		<query>
