@@ -4,15 +4,14 @@ The Multi-connection Tactile Internet Protocol (MTIP) is a transport protocol fo
 
 
 ## Models
----
+
 `Models/` presents the models developed for MTIP.
 
-* Promela models: ``ModelA.pml``, ``ModelB_Losses.pml`` and ``ModelB_NoLoss.pml`` are models developed using the Promela language to check the correctness of the protocol. Further information in [.]
+* Promela models: ``ModelA.pml``, ``ModelB_Losses.pml`` and ``ModelB_NoLoss.pml`` are models developed using the Promela language to check the correctness of the protocol. Further information in [DOI: 10.1145/3479242.3487328](https://dl.acm.org/doi/10.1145/3479242.3487328).
 
-* Uppaal model: ``UppaalModel.pml`` is the model developed in the Uppaal tool to check the performance of the protocol. Further information in [.]
-
+* Uppaal model: ``UppaalModel.pml`` is the model developed in the Uppaal tool to check the performance of the protocol.  
 ## API
----
+
 This section presents the API functions  in a typical order of usage.
 
 ### Create a new socket
@@ -34,7 +33,7 @@ This section presents the API functions  in a typical order of usage.
 
 ``int mtip_preferences(int sd, char *prefs)``
 
-* @param prefs: [Go to Context Information section](#context)
+* @param prefs: [Go to Context Information section](#context).
 
 ### Receive (set a callback for the reception of data)
 
@@ -56,17 +55,16 @@ This section presents the API functions  in a typical order of usage.
 
 ``int mtip_feedback(int sd, char *&feedback,  int type)``
 
-* @param feedback:  [Go to Context Information section](#context)
+* @param feedback:  [Go to Context Information section](#context).
 * @param type: GENERAL (Characterization of each sublink).
 
 ### Close Socket
 
 ``int mtip_close(int sd)``
 
-
 ## Context Information
 
-Context information refers to the communication preferences that can be set in `` mtip_preferences`` and the feedback information that can be retrieved from ``mtip_feedback``.
+Context information refers to the communication preferences that can be set in ``mtip_preferences`` and the feedback information that can be retrieved from ``mtip_feedback``.
 
 ### Communication preferences
 
@@ -100,7 +98,7 @@ The application can obtain the following feedback information:
 
 
 ## Application examples
----
+
 This section presents a remote control application (``Applications/Simple_Controller/``)  and controlled device application (``Applications/Simple_Device/``) to showcase an example of the usage of MTIP API.
 
 ### Usage
