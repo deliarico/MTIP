@@ -99,7 +99,7 @@ The application can obtain the following feedback information:
 
 ## Application examples
 
-This section presents a remote control application (``Applications/Simple_Controller/``)  and controlled device application (``Applications/Simple_Device/``) to showcase an example of the usage of MTIP API.
+To showcase an example of the usage of MTIP API ``Applications/Simple_Controller/`` presents a remote control application and (``Applications/Simple_Device/``) a controlled device application.
 
 ### Usage
 
