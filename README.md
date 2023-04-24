@@ -99,7 +99,7 @@ The application can obtain the following feedback information:
 
 ## Application examples
 
-To showcase an example of the usage of MTIP API, ``Applications/Simple_Controller/`` presents a remote control application and (``Applications/Simple_Device/``) a controlled device application.
+To showcase an example of the usage of MTIP API, ``Applications/Example_Controller/`` presents a remote control application and (``Applications/Example_Device/``) a controlled device application.
 
 ### Usage
 
@@ -111,8 +111,9 @@ To showcase an example of the usage of MTIP API, ``Applications/Simple_Controlle
 #### Preparation
 
 1. Download ``Application/`` folder.
-2. Copy libMTIP.so (\*) and MTIP headers (\*) to ``Application/`` folder 
-3. Change IP and ports in ``Device.cpp`` and ``Controller.cpp`` if there was any conflict.
+2. Copy libMTIP.so (\*) and MTIP headers (\*) to ``Applications/MTIP/`` folder 
+3. Change IP and ports in ``Applications/Example_Device/Device.cpp`` and ``Applications/Example_Controller/Controller.cpp`` if there was any conflict.
+4. Change QT path accordingly in ``Applications/Example_Device/CMakeLists.txt`` and ``Applications/Example_Controller/CMakeLists.txt``.
 
 (*) Regrettably, the access to the files is currently unavailable due to licensing restrictions. The files will be made available again as expeditiously as circumstances allow.
 
