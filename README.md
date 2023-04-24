@@ -75,7 +75,7 @@ The application can set the following communication preferences:
 |---|---|---|---| 
 |Algorithm mode (AM)  |It selects the algorithm that  is going to be used for the selection of sublinks. The  sublinks might be selected by the application (fixed  selection) or dynamically  by the protocol.|0: Use all sublinks   (fixed selection) 1: Use one sublink   (fixed selection) 2: Use best (N) sublinks   (dynamic selection) 3: Use the MTIP Algorithm   (dynamic selection)|  0 | 
 |Number of sublinks (N)|It selects the sublink that  is in use  (in the case of  AM 1) or the number of  sublinks that should be in  use (in the case of AM 2).|0 to the maximum number  of sublinks available|   0
-|Maximum latency (deadline) |It defines the maximum  end-to-end latency of the  packets, namely the  deadline|  0 to 1e9 nanoseconds    |    
+|Maximum latency (deadline) |It defines the maximum  end-to-end latency of the  packets, namely the  deadline|  0 to 1e9 nanoseconds    |    1e7 nanoseconds 
 |Duplicate threshold (DT)   |It defines the maximum  percentage of duplicate  packets that the MTIP  algorithm considers  reasonable (only used in AM 3).| 0 to 100 \%  | 50       
 |Loss-late threshold (LT)  |It defines the maximum  percentage of loss or late  packets that the MTIP  algorithm considers  reasonable(only used in  AM 3).|0 to 100  \%   |    10 
 |Latency weight (LW) |It defines how the sublink  ranking must be calculated, using just reliability  measurements (LW 0),  using only latency  measurements (LW 100),  or using a weighted mean  of both measurements  (LW from 0 to 100).|0 to 100  \%   |    100  
@@ -114,7 +114,7 @@ To showcase an example of the usage of MTIP API, ``Applications/Simple_Controlle
 2. Copy libMTIP.so (\*) and MTIP headers (\*) to ``Application/`` folder 
 3. Change IP and ports in ``Device.cpp`` and ``Controller.cpp`` if there was any conflict.
 
-(*) Regrettably, access to the files is currently unavailable due to licensing restrictions. The files will be made available again as soon as possible.
+(*) Regrettably, the access to the files is currently unavailable due to licensing restrictions. The files will be made available again as expeditiously as circumstances allow.
 
 #### Execution
 
