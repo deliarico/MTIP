@@ -113,7 +113,6 @@ To showcase an example of the usage of MTIP API, ``Applications/Example_Controll
 1. Download ``Application/`` folder.
 2. Copy libMTIP.so (\*) and MTIP headers (\*) to ``Applications/MTIP/`` folder. Create folder if necessary.
 3. Change IP and ports in ``Applications/Example_Device/Device.cpp`` and ``Applications/Example_Controller/Controller.cpp`` if there was any conflict.
-4. Change QT path accordingly in ``Applications/Example_Device/CMakeLists.txt`` and ``Applications/Example_Controller/CMakeLists.txt``.
 
 (*) Regrettably, the access to the files is currently unavailable due to licensing restrictions. The files will be made available again as expeditiously as circumstances allow.
 

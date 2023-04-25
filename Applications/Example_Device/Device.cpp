@@ -31,8 +31,7 @@
 /** IP and ports */
 #define IP_1 "10.0.0.1"
 #define IP_2 "11.0.0.1"
-#define PORT_1 1111
-#define PORT_2 3333
+#define PORT 1111
 
 /** Connection */
 void reception_callback(char *order, double time);
@@ -75,12 +74,12 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    if (mtip_bind(g_socket_descriptor,IP_1,PORT_1) == -1) {
+    if (mtip_bind(g_socket_descriptor,IP_1,PORT) == -1) {
         perror("Error binding socket");
         exit(1);
     }
 
-    if (mtip_bind(g_socket_descriptor,IP_2,PORT_1) == -1) {
+    if (mtip_bind(g_socket_descriptor,IP_2,PORT) == -1) {
         perror("Error binding socket");
         exit(1);
     }

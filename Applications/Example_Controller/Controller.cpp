@@ -36,8 +36,8 @@
 #define IP_1 "10.0.0.2"
 #define IP_2 "11.0.0.2"
 #define IP_REMOTE "10.0.0.1"
-#define PORT_1 5555
-#define PORT_2 7777
+#define PORT 5555
+#define PORT_REMOTE 1111
 
 /** Connection */
 void reception_callback(char *order, double time);
@@ -92,12 +92,12 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    if (mtip_bind(g_socket_descriptor,IP_1,PORT_1) == -1) {
+    if (mtip_bind(g_socket_descriptor,IP_1,PORT) == -1) {
         perror("Error binding socket");
         exit(1);
     }
 
-    if (mtip_bind(g_socket_descriptor,IP_2,PORT_1) == -1) {
+    if (mtip_bind(g_socket_descriptor,IP_2,PORT) == -1) {
         perror("Error binding socket");
         exit(1);
     }
@@ -120,7 +120,7 @@ int main(int argc, char *argv[]) {
     }
 
     while (link_opened < 0) {
-        link_opened = mtip_link(socket,MTIP::Mode::CONTROLLER, IP_REMOTE, 1111);
+        link_opened = mtip_link(g_socket_descriptor,MTIP::Mode::CONTROLLER, IP_REMOTE, PORT_REMOTE);
     }
 
     free(my_ip);
