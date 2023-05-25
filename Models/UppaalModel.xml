@@ -23,7 +23,7 @@ int c_lossTendency=50;
 int c_lateTendency=50;
 
 int d_r=0, d_b=0, o_r=0, o_b=0, l_r=0, l_b=0;
-int a_r=0, a_b=0;
+int a_r=0, a_b=0, a_a=0;
 
 // Channels
 broadcast chan Sync;
@@ -86,14 +86,14 @@ clockTime&lt;=sndTime+1</label>
 			<committed/>
 		</location>
 		<location id="id5" x="-476" y="85">
-			<name x="-595" y="76">SelectingWhite</name>
+			<name x="-459" y="76">SelectingWhite</name>
 			<committed/>
 		</location>
 		<location id="id6" x="-110" y="-323">
 			<name x="-170" y="-357">WaitingForReset</name>
 		</location>
 		<location id="id7" x="17" y="170">
-			<name x="-17" y="136">ToSublinks</name>
+			<name x="-17" y="136">toSublinks</name>
 			<committed/>
 		</location>
 		<location id="id8" x="-323" y="85">
@@ -158,14 +158,18 @@ wolper++</label>
 		</transition>
 		<transition>
 			<source ref="id5"/>
-			<target ref="id4"/>
-			<label kind="guard" x="-552" y="110">wolper&lt;4</label>
-			<label kind="assignment" x="-552" y="126">wolper++</label>
+			<target ref="id3"/>
+			<label kind="guard" x="-569" y="110">wolper&lt;4</label>
+			<label kind="assignment" x="-569" y="127">wolper++</label>
 			<nail x="-476" y="144"/>
+			<nail x="-603" y="144"/>
+			<nail x="-603" y="-59"/>
+			<nail x="-323" y="-59"/>
 		</transition>
 		<transition>
 			<source ref="id5"/>
 			<target ref="id4"/>
+			<nail x="-476" y="144"/>
 		</transition>
 		<transition>
 			<source ref="id3"/>
@@ -547,7 +551,8 @@ int rcpBufferConsumed(){
 		<transition>
 			<source ref="id27"/>
 			<target ref="id23"/>
-			<label kind="assignment" x="314" y="-501">a_b++,
+			<label kind="assignment" x="314" y="-501">a_a++,
+a_b++,
 consumed=0</label>
 			<nail x="306" y="-399"/>
 			<nail x="195" y="-399"/>
@@ -555,7 +560,8 @@ consumed=0</label>
 		<transition>
 			<source ref="id26"/>
 			<target ref="id23"/>
-			<label kind="assignment" x="-76" y="-501">a_r++, 
+			<label kind="assignment" x="-76" y="-501">a_a++,
+a_r++, 
 consumed=0</label>
 			<nail x="51" y="-399"/>
 			<nail x="161" y="-399"/>
@@ -756,59 +762,50 @@ dstLoc=0</label>
 		</transition>
 	</template>
 	<system>// Place template instantiations here.
-s = Sender();
-sb0 = Sublink(0);
-sb1 = Sublink(1);
-sb2 = Sublink(2); 
-r = Receiver();
+s =Sender();
+s0 =Sublink(0);
+s1 =Sublink(1); 
+s2 =Sublink(2);
+r =Receiver();
 
 // List one or more processes to be composed into a system.
-system s,sb0,sb1,sb2,r;
+system s,s0,s1,s2,r;
     </system>
 	<queries>
 		<query>
 			<formula>A[] not deadlock</formula>
-			<comment>General</comment>
-		</query>		
-		<query>
-			<formula>A[] not ((l_r == c_sblNum &amp;&amp; a_r &gt; 0) &amp;&amp; (l_b == c_sblNum &amp;&amp; a_b &gt; 0))</formula>
-			<comment>p1</comment>
+			<comment></comment>
 		</query>
 		<query>
-			<formula>A[] ((a_r &lt;= 1) &amp;&amp; (a_b &lt;= 1)) 
-</formula>
-			<comment>p2</comment>
-		</query> 
+			<formula>Pr[&lt;=100] (&lt;&gt;a_r&gt;0)</formula>
+			<comment></comment>
+		</query>
 		<query>
-			<formula>A[] not (r.r_r &amp;&amp; a_b &gt; 0)</formula>
-			<comment>p3</comment>
+			<formula>Pr[&lt;=100] (&lt;&gt;d_r&gt;0)</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>Pr[&lt;=100] (&lt;&gt;receiverEnd==1)</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>A[] not ((l_r == c_sblNum &amp;&amp; a_r &gt; 0) || (l_b == c_sblNum &amp;&amp; a_b &gt; 0)) </formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>A[] ((a_r &lt;= 1) &amp;&amp; (a_b &lt;= 1))</formula>
+			<comment></comment>
+		</query>
+		<query>
+			<formula>A[] not (r.r_r &amp;&amp; a_b&gt;0)</formula>
+			<comment></comment>
 		</query>
 		<query>
 			<formula>(o_r == 1 &amp;&amp; a_r == 0) --&gt; r.r_r</formula>
-			<comment>p4_1</comment>
+			<comment></comment>
 		</query>
 		<query>
 			<formula>(o_b == 1 &amp;&amp; a_b == 0) --&gt; r.r_b</formula>
-			<comment>p4_2</comment>
-		</query>
-		<query>
-			<formula>Pr[&lt;=100] (&lt;&gt; a_r &gt; 0)</formula>
-			<comment></comment>
-		</query>
-		<query>
-			<formula>Pr[&lt;=100] (&lt;&gt; d_r &gt; 0)</formula>
-			<comment></comment>
-		</query>
-		<query>
-			<formula>Pr[&lt;=100] (&lt;&gt; a_b &gt; 0)</formula>
-			<comment></comment>
-		</query>
-		<query>
-			<formula>Pr[&lt;=100] (&lt;&gt; d_b &gt; 0)</formula>
-			<comment></comment>
-		</query>
-		<query>
-			<formula>Pr[&lt;=100] (&lt;&gt; receiverEnd == 1)</formula>
 			<comment></comment>
 		</query>
 	</queries>
