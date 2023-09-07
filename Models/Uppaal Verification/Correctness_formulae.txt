@@ -1,0 +1,6 @@
+formula 1: A[] not deadlock
+formula 2: A[] not ((l_r == c_sblNum && a_r > 0) || (l_b == c_sblNum && a_b > 0)) }
+formula 3: A[] ((a_r <= 1) && (a_b <= 1)) }
+formula 4: A[] not (r.r_r && a_b>0) }
+formula 5: (o_r == 1 && a_r == 0) --> r.r_r }
+formula 6: (o_b == 1 && a_b == 0) --> r.r_b }
