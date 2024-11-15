@@ -1,0 +1,9 @@
+[2024/11/06 00:28:34:1930] N: lws_create_context: LWS: 4.3.3-unknown, NET CLI SRV H1 H2 WS ConMon IPV6-on
+[2024/11/06 00:28:34:1931] N: __lws_lc_tag:  ++ [wsi|0|pipe] (1)
+[2024/11/06 00:28:34:1931] N: __lws_lc_tag:  ++ [vh|0|netlink] (1)
+[2024/11/06 00:28:34:1932] N: __lws_lc_tag:  ++ [vh|1|default||8080] (2)
+[2024/11/06 00:28:34:1932] N: [vh|1|default||8080]: lws_socket_bind: source ads 0.0.0.0
+[2024/11/06 00:28:34:1932] N: __lws_lc_tag:  ++ [wsi|1|listen|default||8080] (2)
+[2024/11/06 00:28:34:1932] N: [vh|1|default||8080]: lws_socket_bind: source ads ::
+[2024/11/06 00:28:34:1932] N: __lws_lc_tag:  ++ [wsi|2|listen|default||8080] (3)
+[2024/11/06 00:28:35:2302] N: __lws_lc_tag:  ++ [wsisrv|0|adopted] (1)
