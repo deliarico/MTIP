@@ -1,126 +1,126 @@
-Results for results_mpquic-1-Filter-Background_20250325_180006:
-  Latency Statistics: Mean: 7.94, Max: 34.00, Min: 3.00
+Results for results_mpquic-1-Filter-Congestion_20250610_172347:
+  Latency Statistics: Mean: 10.05, Max: 275.00, Min: 3.00
+  Status Percentages: Received: 88.10%, Lost: 11.90%
+--------------------------------------------------
+
+Results for results_mpquic-1-Filter-Congestion_20250610_172617:
+  Latency Statistics: Mean: 4032.64, Max: 14274.00, Min: 4.00
+  Status Percentages: Received: 24.57%, Lost: 75.43%
+--------------------------------------------------
+
+Results for results_mpquic-1-Filter-Congestion_20250610_172848:
+  Latency Statistics: Mean: 587.91, Max: 7146.00, Min: 3.00
   Status Percentages: Received: 100.00%, Lost: 0.00%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_180130:
-  Latency Statistics: Mean: 8.46, Max: 252.00, Min: 3.00
+Results for results_mpquic-1-Filter-Congestion_20250610_173119:
+  Latency Statistics: Mean: 805.66, Max: 7911.00, Min: 3.00
   Status Percentages: Received: 100.00%, Lost: 0.00%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_180253:
-  Latency Statistics: Mean: 405.09, Max: 7074.00, Min: 4.00
+Results for results_mpquic-1-Filter-Congestion_20250610_173350:
+  Latency Statistics: Mean: 893.00, Max: 7422.00, Min: 3.00
+  Status Percentages: Received: 61.10%, Lost: 38.90%
+--------------------------------------------------
+
+Results for results_mpquic-1-Filter-Congestion_20250610_173621:
+  Latency Statistics: Mean: 1553.86, Max: 12424.00, Min: 3.00
+  Status Percentages: Received: 98.95%, Lost: 1.05%
+--------------------------------------------------
+
+Results for results_mpquic-1-Filter-Congestion_20250610_173852:
+  Latency Statistics: Mean: 32.35, Max: 1624.00, Min: 3.00
   Status Percentages: Received: 100.00%, Lost: 0.00%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_180416:
-  Latency Statistics: Mean: 8.30, Max: 43.00, Min: 3.00
-  Status Percentages: Received: 86.10%, Lost: 13.90%
---------------------------------------------------
-
-Results for results_mpquic-1-Filter-Background_20250325_180540:
-  Latency Statistics: Mean: 9.21, Max: 465.00, Min: 4.00
+Results for results_mpquic-1-Filter-Congestion_20250610_174123:
+  Latency Statistics: Mean: 8602.44, Max: 27424.00, Min: 3.00
   Status Percentages: Received: 100.00%, Lost: 0.00%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_180703:
-  Latency Statistics: Mean: 8.22, Max: 258.00, Min: 3.00
+Results for results_mpquic-1-Filter-Congestion_20250610_174353:
+  Latency Statistics: Mean: 3125.80, Max: 17923.00, Min: 3.00
+  Status Percentages: Received: 24.71%, Lost: 75.29%
+--------------------------------------------------
+
+Results for results_mpquic-1-Filter-Congestion_20250610_174624:
+  Latency Statistics: Mean: 18.10, Max: 879.00, Min: 3.00
   Status Percentages: Received: 100.00%, Lost: 0.00%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_180827:
-  Latency Statistics: Mean: 8.28, Max: 34.00, Min: 3.00
+Results for results_mpquic-1-Filter-Congestion_20250610_174855:
+  Latency Statistics: Mean: 1354.16, Max: 9749.00, Min: 3.00
   Status Percentages: Received: 100.00%, Lost: 0.00%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_180950:
-  Latency Statistics: Mean: 7.96, Max: 33.00, Min: 3.00
+Results for results_mpquic-1-Filter-Congestion_20250610_175126:
+  Latency Statistics: Mean: 2423.75, Max: 10223.00, Min: 3.00
   Status Percentages: Received: 100.00%, Lost: 0.00%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_182220:
-  Latency Statistics: Mean: 8.37, Max: 246.00, Min: 4.00
+Results for results_mpquic-1-Filter-Congestion_20250610_175356:
+  Latency Statistics: Mean: 27.25, Max: 915.00, Min: 3.00
+  Status Percentages: Received: 68.05%, Lost: 31.95%
+--------------------------------------------------
+
+Results for results_mpquic-1-Filter-Congestion_20250610_175627:
+  Latency Statistics: Mean: 6005.09, Max: 21640.00, Min: 3.00
   Status Percentages: Received: 100.00%, Lost: 0.00%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_182344:
-  Latency Statistics: Mean: 8.89, Max: 49.00, Min: 3.00
+Results for results_mpquic-1-Filter-Congestion_20250610_175858:
+  Latency Statistics: Mean: 1251.89, Max: 8513.00, Min: 3.00
+  Status Percentages: Received: 65.10%, Lost: 34.90%
+--------------------------------------------------
+
+Results for results_mpquic-1-Filter-Congestion_20250610_180129:
+  Latency Statistics: Mean: 5924.45, Max: 27347.00, Min: 3.00
   Status Percentages: Received: 100.00%, Lost: 0.00%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_182507:
-  Latency Statistics: Mean: 8.35, Max: 261.00, Min: 3.00
+Results for results_mpquic-1-Filter-Congestion_20250610_180400:
+  Latency Statistics: Mean: 2065.56, Max: 13451.00, Min: 3.00
   Status Percentages: Received: 100.00%, Lost: 0.00%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_182630:
-  Latency Statistics: Mean: 8.29, Max: 34.00, Min: 3.00
+Results for results_mpquic-1-Filter-Congestion_20250610_180631:
+  Latency Statistics: Mean: 1419.38, Max: 10908.00, Min: 3.00
+  Status Percentages: Received: 97.90%, Lost: 2.10%
+--------------------------------------------------
+
+Results for results_mpquic-1-Filter-Congestion_20250610_180901:
+  Latency Statistics: Mean: 4593.45, Max: 22940.00, Min: 3.00
   Status Percentages: Received: 100.00%, Lost: 0.00%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_182754:
-  Latency Statistics: Mean: 8.77, Max: 277.00, Min: 3.00
-  Status Percentages: Received: 100.00%, Lost: 0.00%
+Results for results_mpquic-1-Filter-Congestion_20250610_181132:
+  Latency Statistics: Mean: 1609.58, Max: 10201.00, Min: 3.00
+  Status Percentages: Received: 97.24%, Lost: 2.76%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_182917:
-  Latency Statistics: Mean: 31.88, Max: 1739.00, Min: 4.00
-  Status Percentages: Received: 100.00%, Lost: 0.00%
+Results for results_mpquic-1-Filter-Congestion_20250610_181403:
+  Latency Statistics: Mean: 18.67, Max: 1009.00, Min: 3.00
+  Status Percentages: Received: 87.81%, Lost: 12.19%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_183041:
-  Latency Statistics: Mean: 8.22, Max: 35.00, Min: 3.00
-  Status Percentages: Received: 100.00%, Lost: 0.00%
+Results for results_mpquic-1-Filter-Congestion_20250610_181634:
+  Latency Statistics: Mean: 245.52, Max: 3136.00, Min: 3.00
+  Status Percentages: Received: 98.24%, Lost: 1.76%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_183204:
-  Latency Statistics: Mean: 8.06, Max: 36.00, Min: 3.00
-  Status Percentages: Received: 83.90%, Lost: 16.10%
+Results for results_mpquic-1-Filter-Congestion_20250610_181905:
+  Latency Statistics: Mean: 67.14, Max: 2080.00, Min: 3.00
+  Status Percentages: Received: 84.62%, Lost: 15.38%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_183327:
-  Latency Statistics: Mean: 8.01, Max: 32.00, Min: 3.00
-  Status Percentages: Received: 100.00%, Lost: 0.00%
+Results for results_mpquic-1-Filter-Congestion_20250610_182135:
+  Latency Statistics: Mean: 1657.18, Max: 11377.00, Min: 3.00
+  Status Percentages: Received: 98.76%, Lost: 1.24%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background_20250325_183614:
-  Latency Statistics: Mean: 757.19, Max: 9711.00, Min: 3.00
-  Status Percentages: Received: 100.00%, Lost: 0.00%
---------------------------------------------------
-
-Results for results_mpquic-1-Filter-Background_20250325_183738:
-  Latency Statistics: Mean: 8.82, Max: 44.00, Min: 3.00
-  Status Percentages: Received: 100.00%, Lost: 0.00%
---------------------------------------------------
-
-Results for results_mpquic-1-Filter-Background_20250325_184024:
-  Latency Statistics: Mean: 8.49, Max: 269.00, Min: 3.00
-  Status Percentages: Received: 100.00%, Lost: 0.00%
---------------------------------------------------
-
-Results for results_mpquic-1-Filter-Background_20250325_184148:
-  Latency Statistics: Mean: 9.28, Max: 459.00, Min: 4.00
-  Status Percentages: Received: 100.00%, Lost: 0.00%
---------------------------------------------------
-
-Results for results_mpquic-1-Filter-Background_20250325_184311:
-  Latency Statistics: Mean: 7.97, Max: 33.00, Min: 3.00
-  Status Percentages: Received: 89.05%, Lost: 10.95%
---------------------------------------------------
-
-Results for results_mpquic-1-Filter-Background_20250325_184434:
-  Latency Statistics: Mean: 8.66, Max: 117.00, Min: 3.00
-  Status Percentages: Received: 100.00%, Lost: 0.00%
---------------------------------------------------
-
-Results for results_mpquic-1-Filter-Background_20250325_184558:
-  Latency Statistics: Mean: 8.48, Max: 36.00, Min: 3.00
-  Status Percentages: Received: 100.00%, Lost: 0.00%
---------------------------------------------------
-
-Results for results_mpquic-1-Filter-Background_20250325_184721:
-  Latency Statistics: Mean: 8.59, Max: 37.00, Min: 3.00
-  Status Percentages: Received: 100.00%, Lost: 0.00%
+Results for results_mpquic-1-Filter-Congestion_20250610_182406:
+  Latency Statistics: Mean: 63.85, Max: 1602.00, Min: 3.00
+  Status Percentages: Received: 37.62%, Lost: 62.38%
 --------------------------------------------------
 
 Results for results_mpquic-1-Filter-False_20241031_103618:
@@ -498,9 +498,9 @@ Results for results_mpquic-1-Filter-True_20241031_101526:
   Status Percentages: Received: 72.05%, Lost: 27.95%
 --------------------------------------------------
 
-Results for results_mpquic-1-Filter-Background:
-  Latency Statistics: Mean: 55.19, Max: 864.32, Min: 3.20
-  Status Percentages: Received: 98.36%, Lost: 1.64%
+Results for results_mpquic-1-Filter-Congestion:
+  Latency Statistics: Mean: 1935.55, Max: 10095.72, Min: 3.04
+  Status Percentages: Received: 85.31%, Lost: 14.69%
 --------------------------------------------------
 
 Results for results_mpquic-1-Filter-False:
@@ -519,7 +519,7 @@ Results for results_mpquic-1-Filter-True:
 --------------------------------------------------
 
 Results for all:
-  Latency Statistics: Mean: 320.48, Max: 2695.86, Min: 3.28
-  Status Percentages: Received: 95.58%, Lost: 4.42%
+  Latency Statistics: Mean: 790.57, Max: 5003.71, Min: 3.24
+  Status Percentages: Received: 92.31%, Lost: 7.69%
 --------------------------------------------------
 
