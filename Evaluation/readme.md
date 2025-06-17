@@ -10,7 +10,7 @@ The nomenclature in the files is the following:
 
 * **Protocol**: MPTCP (mptcp-1), MPQUIC (mpquic-1), MTIP (mtip-a: use of all paths, mtip-b: use of MTIP's path algorithm selection).
 * **Scenario**: There are 4 scenarios: two regular 5G-SA paths (Filter-False), one link failure in one of the 5G-SA paths (Filter-True), 
-additional latency impairments to the paths (Filter-Special) and additional congestion impairments (Filter-Congestion). The impairments are described in folder <em>/impairments</em>.
+additional latency impairments to the paths (Filter-Special) and additional congestion impairments (Filter-Congestion). The impairments are described in folder ``impairments``.
 * **Endpoint**: Controller (server_stderr_log & server_stdout_log) and Robot (client_stderr_log, client_stdout_log, robot_stderr_log & robot_stdout_log).
 * **Timestamp**: date of the test.
 
