@@ -1,15 +1,14 @@
 # The Multi-connection Tactile Internet Protocol (MTIP)
 
-The Multi-connection Tactile Internet Protocol (MTIP) is a transport protocol for the remote control of Tactile Internet applications. This repository presents MTIP models, API documentation and examples of applications.
+The Multi-connection Tactile Internet Protocol (MTIP) is a transport protocol for the remote control of Tactile Internet applications. 
+This repository presents models, applications and evaluation results of the protocol. Each folder has its own README.md with additional information.
+Below, we give an overview of the protocol and API documentation.
 
 
-## Models
 
-`Models/` presents the models developed for MTIP.
+## Overview
 
-* Promela models: ``ModelA.pml``, ``ModelB_Losses.pml`` and ``ModelB_NoLoss.pml`` are models developed using the Promela language to check the correctness of the protocol. Further information in [DOI: 10.1145/3479242.3487328](https://dl.acm.org/doi/10.1145/3479242.3487328).
-
-* Uppaal model: ``UppaalModel.pml`` is the model developed in the Uppaal tool to check the performance of the protocol.  It also presents the results obtained verifying different deadline values and dissimilar sublinks.
+MTIP creates a link between two endpoints (typically a remote device and a controller) that consists of several sublinks. Current implementation of MTIP offers a C/C++ API described as follows.
 
 ## API
 
@@ -98,28 +97,8 @@ The application can obtain the following feedback information:
 
 
 
-## Application examples
+## Example 
 
-To showcase an example of the usage of MTIP API, ``Applications/Example_Controller/`` presents a remote control application and (``Applications/Example_Device/``) a controlled device application.
-
-### Usage
-
-#### Prequisites
-
-* Linux OS
-* QT 5.0 or higher
-
-#### Preparation
-
-1. Download ``Application/`` folder.
-2. Copy libMTIP.so (\*) and MTIP headers (\*) to ``Applications/MTIP/`` folder. Create folder if necessary.
-3. Change IP and ports in ``Applications/Example_Device/Device.cpp`` and ``Applications/Example_Controller/Controller.cpp`` if there was any conflict.
-
-(*) Regrettably, the access to these files is currently unavailable due to licensing restrictions. The files will be made available as soon as circumstances allow.
-
-#### Execution
-
-1. Run ``Device.cpp``.
-2. Run ``Controller.cpp``.
+To showcase an example of the use of MTIP API, ``Applications/`` presents a remote control application and a controlled device application.
 
 
